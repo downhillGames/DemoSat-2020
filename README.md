@@ -4,16 +4,16 @@ This project has all of the code that was created throughout the semester for th
 
 ## Parts
 
-UV Sensors (4x)
-Ozone Sensor
-Altitude Sensor
-Temperature Sensor
+UV Sensors (4x)  
+Ozone Sensor  
+Altitude Sensor  
+Temperature Sensor  
 
 ## Team
 
-Mat H. - Project Lead
-Alison F. - Admin & Testing
-Warren B. - Science & Research
-Jake R. - Design & Hardware
-Tyler S.- Software Developer
+Mat H. - Project Lead  
+Alison F. - Admin & Testing  
+Warren B. - Science & Research  
+Jake R. - Design & Hardware   
+Tyler S.- Software Developer  
 
