@@ -119,8 +119,8 @@ void setup(void)
     Wire.begin();
         
     connectUVSensors();
-    connectAltimeter();
-    connectOzoneSensor();
+    //connectAltimeter();
+    //connectOzoneSensor();
 
     //Serial.print("UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, ");
     //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
@@ -136,16 +136,16 @@ void setup(void)
 void printUV(int sensor){
 
   if (sensor == 1){
-     Serial.print("uv_1_a "+ String(uv_1.a()) + ", " + "uv_1_b " + String(uv_1.b()) + ", " + "uv_1_comp1 " + String(uv_1.uvComp1()) + ", " + "uv_1_comp2 " + String(uv_1.uvComp2()) + ", " + "uv_1_index" + String(uv_1.index()) + ", ");
+     Serial.print("uv_1_a "+ String(uv_1.a()) + ", " + "uv_1_b " + String(uv_1.b()) + ", " + "uv_1_comp1 " + String(uv_1.uvComp1()) + ", " + "uv_1_comp2 " + String(uv_1.uvComp2()) + ", " + "uv_1_index " + String(uv_1.index()) + ", ");
   }
   else if (sensor == 2){
-     Serial.print("uv_2_a "+ String(uv_2.a()) + ", " + "uv_2_b " + String(uv_2.b()) + ", " + "uv_2_comp1 " + String(uv_2.uvComp1()) + ", " + "uv_2_comp2 " + String(uv_2.uvComp2()) + ", " + "uv_2_index" + String(uv_2.index()) + ", ");
+     Serial.print("uv_2_a "+ String(uv_2.a()) + ", " + "uv_2_b " + String(uv_2.b()) + ", " + "uv_2_comp1 " + String(uv_2.uvComp1()) + ", " + "uv_2_comp2 " + String(uv_2.uvComp2()) + ", " + "uv_2_index " + String(uv_2.index()) + ", ");
   }
   else if (sensor == 3){
-     Serial.print("uv_3_a "+ String(uv_3.a()) + ", " + "uv_3_b " + String(uv_3.b()) + ", " + "uv_3_comp1 " + String(uv_3.uvComp1()) + ", " + "uv_3_comp2 " + String(uv_3.uvComp2()) + ", " + "uv_3_index" + String(uv_3.index()) + ", ");
+     Serial.print("uv_3_a "+ String(uv_3.a()) + ", " + "uv_3_b " + String(uv_3.b()) + ", " + "uv_3_comp1 " + String(uv_3.uvComp1()) + ", " + "uv_3_comp2 " + String(uv_3.uvComp2()) + ", " + "uv_3_index " + String(uv_3.index()) + ", ");
   }
   else if (sensor == 4){
-    Serial.print("uv_4_a "+ String(uv_4.a()) + ", " + "uv_4_b " + String(uv_4.b()) + ", " + "uv_4_comp1 " + String(uv_4.uvComp1()) + ", " + "uv_4_comp2 " + String(uv_4.uvComp2()) + ", " + "uv_4_index" + String(uv_4.index()) + ", ");
+    Serial.print("uv_4_a "+ String(uv_4.a()) + ", " + "uv_4_b " + String(uv_4.b()) + ", " + "uv_4_comp1 " + String(uv_4.uvComp1()) + ", " + "uv_4_comp2 " + String(uv_4.uvComp2()) + ", " + "uv_4_index " + String(uv_4.index()) + ", ");
   }
 }
 

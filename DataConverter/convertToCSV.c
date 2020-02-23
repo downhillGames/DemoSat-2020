@@ -52,15 +52,69 @@ int sendContentTo(FILE *in, FILE *out)
 	// Start out assuming input
 	// file contains ZERO lines.
 	int lineCount = 0;
-    fgets(line, MAX_LINE_LEN, in);
+    //fgets(line, MAX_LINE_LEN, in);
+
+
 	// read one line at a time from our input file
 	while (fgets(line, MAX_LINE_LEN, in) != NULL)
 	{
+        char oldWord0[] = "HI";
+        char oldWord1[] = "uv_1_a ";
+        char oldWord2[] = "uv_1_b ";
+        char oldWord3[] = "uv_1_comp1 ";
+        char oldWord4[] = "uv_1_comp2 ";
+        char oldWord5[] = "uv_1_index ";
 
+        char oldWord6[] = "uv_2_a ";
+        char oldWord7[] = "uv_2_b ";
+        char oldWord8[] = "uv_2_comp1 ";
+        char oldWord9[] = "uv_2_comp2 ";
+        char oldWord10[] = "uv_2_index ";
 
+        char oldWord11[] = "uv_3_a ";
+        char oldWord12[] = "uv_3_b ";
+        char oldWord13[] = "uv_3_comp1 ";
+        char oldWord14[] = "uv_3_comp2 ";
+        char oldWord15[] = "uv_3_index ";
+
+        char oldWord16[] = "uv_4_a ";
+        char oldWord17[] = "uv_4_b ";
+        char oldWord18[] = "uv_4_comp1 ";
+        char oldWord19[] = "uv_4_comp2 ";
+        char oldWord20[] = "uv_4_index ";
+
+        char oldWord21[] = "Alt ";
+        char oldWord22[] = "CO_3 ";
+        char oldWord23[] = "TEMP ";
+
+        char newWord[] = "";
+        replaceAll(line, oldWord0, newWord);
+        replaceAll(line, oldWord1, newWord);
+        replaceAll(line, oldWord2, newWord);
+        replaceAll(line, oldWord3, newWord);
+        replaceAll(line, oldWord4, newWord);
+        replaceAll(line, oldWord5, newWord);
+        replaceAll(line, oldWord6, newWord);
+        replaceAll(line, oldWord7, newWord);
+        replaceAll(line, oldWord8, newWord);
+        replaceAll(line, oldWord9, newWord);
+        replaceAll(line, oldWord10, newWord);
+        replaceAll(line, oldWord11, newWord);
+        replaceAll(line, oldWord12, newWord);
+        replaceAll(line, oldWord13, newWord);
+        replaceAll(line, oldWord14, newWord);
+        replaceAll(line, oldWord15, newWord);
+        replaceAll(line, oldWord16, newWord);
+        replaceAll(line, oldWord17, newWord);
+        replaceAll(line, oldWord18, newWord);
+        replaceAll(line, oldWord19, newWord);
+        replaceAll(line, oldWord20, newWord);
+        replaceAll(line, oldWord21, newWord);
+        replaceAll(line, oldWord22, newWord);
+        replaceAll(line, oldWord23, newWord);
 		//send line we just read to output.
-		fprintf(out, "%s", line);
-        fprintf(stdout, "%s", line);
+		fprintf(out, "%s",  line);
+        fprintf(stdout, "%s",  line);
 		//count the lines
 		lineCount++;
 	}
@@ -126,10 +180,45 @@ int wordCount(FILE *fp)
 	return wordCount;
 }
 
+
+void replaceAll(char *str, const char *oldWord, const char *newWord)
+{
+    char *pos, temp[MAX_LINE_LEN];
+    int index = 0;
+    int owlen;
+
+    owlen = strlen(oldWord);
+
+
+    /*
+     * Repeat till all occurrences are replaced.
+     */
+    while ((pos = strstr(str, oldWord)) != NULL)
+    {
+        // Bakup current line
+        strcpy(temp, str);
+
+        // Index of current found word
+        index = pos - str;
+
+        // Terminate str after word found index
+        str[index] = '\0';
+
+        // Concatenate str with new word
+        strcat(str, newWord);
+
+        // Concatenate str with remaining words after
+        // oldword found index.
+        strcat(str, temp + index + owlen);
+    }
+}
+
+
+
 //Problem #4
 int appendToFile(char *fileName, char*newText)
 {
-		fprintf(stdout, "Performing file append...\n\n");
+    fprintf(stdout, "Performing file append...\n\n");
 	fprintf(stdout, "Appending: %s\n\n", newText);
 	//open using "append " rights
 	FILE *file = fopen(fileName, "ab");

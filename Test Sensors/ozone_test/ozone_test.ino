@@ -29,9 +29,6 @@ void setup() {
   
   MQ131.calibrate();
 
-  if (MQ131.getR0() < 1){
-    Serial.println("Failed to communacate with ozone sensor");
-  }
   
   Serial.println("Calibration done!");
   Serial.print("R0 = ");
