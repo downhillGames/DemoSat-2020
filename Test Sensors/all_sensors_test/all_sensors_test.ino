@@ -151,14 +151,14 @@ void loop(void){
     }
 
     //if altimeter is detected
-    if (bitRead(connectionBit, 4) == 1){
+    if (bitRead(connectionBit, 5) == 1){
         float altitude = altimeter.readAltitude();
         Serial.print("Altitude(m):");
         Serial.print(altitude, 2);
     }
 
     //if ozone sensor is detected
-    if (bitRead(connectionBit, 5) == 1){
+    if (bitRead(connectionBit, 6) == 1){
         MQ131.sample();
         Serial.print("Concentration O3 : ");
         Serial.print(MQ131.getO3(PPM));

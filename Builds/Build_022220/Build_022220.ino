@@ -14,7 +14,7 @@
 // bit 6 - ozone sensor
 // bit 7 - temp sensor
 char connectionBit = 0;
-    
+int count = 1;
 //Create an instance altimeter
 MPL3115A2 altimeter;
 
@@ -155,6 +155,12 @@ void loop(void){
     //trigger everything every 10 m in altitude - comment out the if statement and the final ending curly brace if you just want to record every half second (or be time based)
     if (int (altimeter.readAltitude()) %  10 == 0)
     {
+
+        Serial.print("COUNT ");
+        Serial.print(++count);
+        //count++;
+        Serial.println(", ");
+        
          //if uv sensor 1 is detected
         if (bitRead(connectionBit, 1) == 1){
             tcaselect(0);

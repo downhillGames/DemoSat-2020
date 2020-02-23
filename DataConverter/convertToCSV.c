@@ -1,0 +1,196 @@
+/*
+============================================================================
+Name        : loremIpsum.c
+Author      : Tyler Schmidt
+Class       : CS 2060 SEC 01
+Description : Basic File I/O
+Date        : 02/22/18
+============================================================================
+*/
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#define MAX_WORD_LEN 100000
+#define MAX_LINE_LEN 100000
+
+//first page (checkout)
+#define dataTXT "data.txt"
+#define dataCSV "data.csv"
+
+
+//prototypes
+int wordCount(FILE *fp);
+int charCount(FILE *fp);
+int sendContentTo(FILE *fp, FILE *out);
+int getWordAt(FILE *fp, int pos, char *word);
+int appendToFile(char *fileName, char*newText);
+
+//main function
+int main(void)
+{
+    //strings to append
+	char append[1000] ="UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, ALTITUDE, OZONE, TEMP, TIMESTAMP  \n";
+    appendPHP(dataTXT, dataCSV, append);
+	return 0;
+}
+
+
+// Read content from file one line (crlf) at a time.
+// Send content to output one line at a time.
+// Returns number of lines processed.
+int sendContentTo(FILE *in, FILE *out)
+{
+	fprintf(stdout, "Performing file copy...\n\n");
+
+	//start at the beginning of the file
+	rewind(in);
+	fseek(in, 0L, SEEK_SET);
+	// array to hold one line of text up to 1000 characters
+	char line[MAX_LINE_LEN];
+
+	// Start out assuming input
+	// file contains ZERO lines.
+	int lineCount = 0;
+    fgets(line, MAX_LINE_LEN, in);
+	// read one line at a time from our input file
+	while (fgets(line, MAX_LINE_LEN, in) != NULL)
+	{
+
+
+		//send line we just read to output.
+		fprintf(out, "%s", line);
+        fprintf(stdout, "%s", line);
+		//count the lines
+		lineCount++;
+	}
+
+	fprintf(stdout, "\nFinished line PHP Append.\n");
+	fprintf(stdout, "Count is: %d.\n\n", lineCount);
+
+	// Return how many text lines
+	// we've processed from input file.
+	return lineCount;
+}
+
+// Read content from file one character at a time.
+// Returns number of total characters read from the file.
+//Problem #2
+int charCount(FILE *fp)
+{
+	fprintf(stdout, "Performing char count...\n\n");
+	unsigned int ch;
+	rewind(fp);
+
+	int charCount = 0;
+
+	while ((ch = getc(fp)) != EOF)
+	{
+
+
+		putc(ch, stdout);
+
+		//count the char
+		charCount++;
+	}
+
+	fprintf(stdout, "\nFinished char count.\n");
+	fprintf(stdout, "Count is: %d.\n\n", charCount);
+	return charCount;
+}
+
+
+// Read content from file one word at a time.
+// Returns number of total words read from the file.
+int wordCount(FILE *fp)
+{
+	fprintf(stdout, "Performing word count...\n\n");
+
+	rewind(fp);
+
+	char word[MAX_WORD_LEN];
+	int wordCount = 0;
+
+	while (fscanf(fp, "%s", word) == 1)
+	{
+		// Send entire word string
+		// we just read to console
+		puts(word);
+
+		//count the word
+		wordCount++;
+	}
+
+	fprintf(stdout, "\nFinished word count.\n");
+	fprintf(stdout, "Count is: %d.\n\n", wordCount);
+	return wordCount;
+}
+
+//Problem #4
+int appendToFile(char *fileName, char*newText)
+{
+		fprintf(stdout, "Performing file append...\n\n");
+	fprintf(stdout, "Appending: %s\n\n", newText);
+	//open using "append " rights
+	FILE *file = fopen(fileName, "ab");
+
+	fputs(newText,file);
+	fclose(file);
+
+	return 0;
+
+}
+
+void appendPHP(char *inputFile, char *outputFile, char*newText)
+{
+   FILE *fp;
+	FILE *out = fopen(outputFile, "wb+");
+	//appended text
+
+	char word[MAX_WORD_LEN];
+	// open Lorem ipsum.txt for read.
+	if ((fp = fopen(inputFile, "rb+")) == NULL)
+	{
+		fprintf(stdout, "Can't open %s file.\n", inputFile);
+		exit(EXIT_FAILURE);
+	}
+	rewind(fp);
+	rewind(out);
+    fprintf(out, newText);
+	int copyFile = sendContentTo(fp, out); //copy text file (Problem #1)
+
+	//close first file
+	fclose(out);
+	if (fclose(fp) != 0)
+		fprintf(stderr, "Error closing file\n");
+	FILE *outAppend = fopen(outputFile, "rb+");
+	fclose(outAppend);
+}
+
+
+//Problem #3
+int getWordAt(FILE *fp, int pos, char *word)
+{
+	printf(stdout, "Performing word count...\n\n");
+
+	rewind(fp);
+
+	char wordA[MAX_WORD_LEN];
+	int wordCount = 0;
+
+	while (fscanf(fp, "%s", wordA) == 1 && wordCount < pos)
+	{
+		// Send entire word string
+		// we just read to console
+		puts(wordA);
+
+		//count the word
+		wordCount++;
+	}
+	word = wordA;
+	fprintf(stdout, "\nFinished finding word\n");
+	fprintf(stdout, "The word is: %s.\n\n", wordA);
+
+	return 0;
+	}
+
