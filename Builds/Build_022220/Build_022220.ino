@@ -123,8 +123,8 @@ void setup(void)
     connectOzoneSensor();
 
     //Serial.print("UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, ");
-   //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
-   //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
+    //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
+    //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
     //Serial.print("UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, " );
     //Serial.print("UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, " );
     //Serial.print("ALTITUDE, OZONE, TEMP, TIMESTAMP " );  
@@ -152,7 +152,7 @@ void printUV(int sensor){
 
 void loop(void){
 
-    //trigger everything every 10 m in altitude
+    //trigger everything every 10 m in altitude - comment out the if statement and the final ending curly brace if you just want to record every half second (or be time based)
     if (int (altimeter.readAltitude()) %  10 == 0)
     {
          //if uv sensor 1 is detected
@@ -181,7 +181,7 @@ void loop(void){
         }
     
         //if altimeter is detected
-        if (bitRead(connectionBit, 4) == 1){
+        if (bitRead(connectionBit, 5) == 1){
             float altitude = altimeter.readAltitude();
             Serial.print("Alt ");
             Serial.print(altitude, 2);
@@ -189,13 +189,28 @@ void loop(void){
         }
     
         //if ozone sensor is detected
-        if (bitRead(connectionBit, 5) == 1){
+        if (bitRead(connectionBit, 6) == 1){
             MQ131.sample();
             Serial.print("CO3 ");
             Serial.print(MQ131.getO3(PPM));
-            Serial.println(", ");
+            Serial.print(", ");
         }
-    }
+
+        //TODO
+        //if temp sensor is detected 
+        if (bitRead(connectionBit, 7) == 1){
+            Serial.print("TEMP ");
+            Serial.print(", ");
+        
+        }
+
+        Serial.print("TIME ");
+        Serial.print(millis() / 1000);
+        Serial.println(", ");
+   
+    
+    
+    } // this is this '} ' that you want to comment out - just put // in front of it
    
              
     delay(500); //delay 500 milliseconds
