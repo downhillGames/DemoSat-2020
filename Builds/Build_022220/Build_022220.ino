@@ -121,51 +121,84 @@ void setup(void)
     connectUVSensors();
     connectAltimeter();
     connectOzoneSensor();
+
+    //Serial.print("UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, ");
+   //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
+   //Serial.print("UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, " );
+    //Serial.print("UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, " );
+    //Serial.print("UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, " );
+    //Serial.print("ALTITUDE, OZONE, TEMP, TIMESTAMP " );  
 }
+
+
+
+
+void printUV(int sensor){
+
+  if (sensor == 1){
+     Serial.print("uv_1_a "+ String(uv_1.a()) + ", " + "uv_1_b " + String(uv_1.b()) + ", " + "uv_1_comp1 " + String(uv_1.uvComp1()) + ", " + "uv_1_comp2 " + String(uv_1.uvComp2()) + ", " + "uv_1_index" + String(uv_1.index()) + ", ");
+  }
+  else if (sensor == 2){
+     Serial.print("uv_2_a "+ String(uv_2.a()) + ", " + "uv_2_b " + String(uv_2.b()) + ", " + "uv_2_comp1 " + String(uv_2.uvComp1()) + ", " + "uv_2_comp2 " + String(uv_2.uvComp2()) + ", " + "uv_2_index" + String(uv_2.index()) + ", ");
+  }
+  else if (sensor == 3){
+     Serial.print("uv_3_a "+ String(uv_3.a()) + ", " + "uv_3_b " + String(uv_3.b()) + ", " + "uv_3_comp1 " + String(uv_3.uvComp1()) + ", " + "uv_3_comp2 " + String(uv_3.uvComp2()) + ", " + "uv_3_index" + String(uv_3.index()) + ", ");
+  }
+  else if (sensor == 4){
+    Serial.print("uv_4_a "+ String(uv_4.a()) + ", " + "uv_4_b " + String(uv_4.b()) + ", " + "uv_4_comp1 " + String(uv_4.uvComp1()) + ", " + "uv_4_comp2 " + String(uv_4.uvComp2()) + ", " + "uv_4_index" + String(uv_4.index()) + ", ");
+  }
+}
+
 
 void loop(void){
 
-    //if uv sensor 1 is detected
-    if (bitRead(connectionBit, 1) == 1){
-        tcaselect(0);
-        Serial.println(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
-    }
-
-   //if uv sensor 2 is detected
-    if (bitRead(connectionBit, 2) == 1){
-        tcaselect(1);
-        Serial.println(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
-    }
-
-    //if uv sensor 3 is detected
-    if (bitRead(connectionBit, 3) == 1){
-        tcaselect(2);
-        Serial.println(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
-    }
-
+    //trigger everything every 10 m in altitude
+    if (int (altimeter.readAltitude()) %  10 == 0)
+    {
+         //if uv sensor 1 is detected
+        if (bitRead(connectionBit, 1) == 1){
+            tcaselect(0);
+            printUV(1);
+        }
     
-    //if uv sensor 4 is detected
-    if (bitRead(connectionBit, 4) == 1){
-        tcaselect(3);
-        Serial.println(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
+       //if uv sensor 2 is detected
+        if (bitRead(connectionBit, 2) == 1){
+            tcaselect(1);
+            printUV(2);
+        }
+    
+        //if uv sensor 3 is detected
+        if (bitRead(connectionBit, 3) == 1){
+            tcaselect(2);
+            printUV(3);
+        }
+    
+        
+        //if uv sensor 4 is detected
+        if (bitRead(connectionBit, 4) == 1){
+            tcaselect(3);
+            printUV(4);
+        }
+    
+        //if altimeter is detected
+        if (bitRead(connectionBit, 4) == 1){
+            float altitude = altimeter.readAltitude();
+            Serial.print("Alt ");
+            Serial.print(altitude, 2);
+            Serial.print(", ");
+        }
+    
+        //if ozone sensor is detected
+        if (bitRead(connectionBit, 5) == 1){
+            MQ131.sample();
+            Serial.print("CO3 ");
+            Serial.print(MQ131.getO3(PPM));
+            Serial.println(", ");
+        }
     }
-
-    //if altimeter is detected
-    if (bitRead(connectionBit, 4) == 1){
-        float altitude = altimeter.readAltitude();
-        Serial.print("Altitude(m):");
-        Serial.print(altitude, 2);
-    }
-
-    //if ozone sensor is detected
-    if (bitRead(connectionBit, 5) == 1){
-        MQ131.sample();
-        Serial.print("Concentration O3 : ");
-        Serial.print(MQ131.getO3(PPM));
-        Serial.println(" ppm");
-    }
+   
              
-    delay(500); //delay 500
+    delay(500); //delay 500 milliseconds
     
 
 
