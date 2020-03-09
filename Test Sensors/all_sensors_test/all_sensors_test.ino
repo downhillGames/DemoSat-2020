@@ -4,7 +4,8 @@
 #include "MQ131.h"
 #include <SD.h>
 
-
+#include <Adafruit_Sensor.h>
+#include "Adafruit_TMP006.h"
 
 //#define TCAADDR1 0x70  //Multiplexer 1
 
@@ -20,6 +21,7 @@
 // Chip Select pin is tied to pin 8 on the SparkFun SD Card Shield
 //const int chipSelect = 8;  
 
+Adafruit_TMP006 tmp006;
 char connectionBit = 0;
     
 //Create an instance altimeter
@@ -36,6 +38,13 @@ void tcaselect(uint8_t i) {
     Wire.beginTransmission(0x70);
     Wire.write(1 << i);
     Wire.endTransmission();
+}
+
+
+void connectTemp(){
+ if (tmp006.begin()) {
+    bitSet(connectionBit, 7);
+  }
 }
 
 void connectAltimeter(){
@@ -140,6 +149,7 @@ void setup(void)
     connectUVSensors();
     connectAltimeter();
     connectSD();
+    connectTemp();
     //connectOzoneSensor();
 }
 
@@ -211,6 +221,21 @@ void loop(void){
         dataFile.print(" ppm");
         dataFile.print(", ");
     }
+
+  //if temp sensor is detected
+    if (bitRead(connectionBit, 7) == 1 && dataFile){
+       float objt = tmp006.readObjTempC();
+       Serial.print("Object Temperature: "); Serial.print(objt); Serial.println("*C");
+       Serial.print(", ");
+       dataFile.print("Object Temperature: "); dataFile.print(objt); dataFile.println("*C");
+       dataFile.print(", ");
+       float diet = tmp006.readDieTempC();
+       Serial.print("Die Temperature: "); Serial.print(diet); Serial.println("*C");
+       Serial.print(", ");
+       dataFile.print("Die Temperature: "); dataFile.print(diet); dataFile.println("*C");
+       dataFile.print(", ");
+    }
+
 
     dataFile.print(millis() / 1000);
     dataFile.println();
