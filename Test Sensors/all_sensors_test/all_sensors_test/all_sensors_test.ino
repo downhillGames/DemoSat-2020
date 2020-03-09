@@ -136,7 +136,9 @@ void connectUVSensors(){
 void setup(void)
 {
     Serial.begin(9600);
-    
+    while (!Serial) {
+            ; // wait for serial port to connect. Needed for Leonardo only
+    }
     Wire.begin(); 
     connectUVSensors();
     connectAltimeter();
@@ -146,40 +148,47 @@ void setup(void)
 }
 
 void loop(void){
+  // make a string for assembling the data to log:
+  String dataString = "";
 
-    File dataFile = SD.open("datalog.txt", FILE_WRITE);
+  // open the file. note that only one file can be open at a time,
+  // so you have to close this one before opening another.
+  // this opens the file and appends to the end of file
+  // if the file does not exist, this will create a new file.
+    
+  File dataFile = SD.open("datalog.txt", FILE_WRITE);
     //if uv sensor 1 is detected
-    if (bitRead(connectionBit, 1) == 1 && dataFile){
+    if (bitRead(connectionBit, 1) == 1 && bitRead(connectionBit, 0) == 1){
         tcaselect(0);
-        Serial.println(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
-        dataFile.println(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
+        Serial.print(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
+        dataFile.print(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
     }
 
    //if uv sensor 2 is detected
-    if (bitRead(connectionBit, 2) == 1 && dataFile){
+    if (bitRead(connectionBit, 2) == 1 && bitRead(connectionBit, 0) == 1){
         tcaselect(1);
-        Serial.println(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
-        dataFile.println(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
+        Serial.print(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
+        dataFile.print(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
     }
 
     //if uv sensor 3 is detected
-    if (bitRead(connectionBit, 3) == 1 && dataFile){
+    if (bitRead(connectionBit, 3) == 1 && bitRead(connectionBit, 0) == 1){
         tcaselect(2);
-        Serial.println(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
-        dataFile.println(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
+        Serial.print(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
+        dataFile.print(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
     }
 
     
     //if uv sensor 4 is detected
-    if (bitRead(connectionBit, 4) == 1 && dataFile){
+    if (bitRead(connectionBit, 4) == 1 && bitRead(connectionBit, 0) == 1){
         tcaselect(3);
-        Serial.println(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
-        dataFile.println(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
+        Serial.print(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
+        dataFile.print(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
         
     }
 
     //if altimeter is detected
-    if (bitRead(connectionBit, 5) == 1 && dataFile){
+    if (bitRead(connectionBit, 5) == 1 && bitRead(connectionBit, 0) == 1){
         float altitude = altimeter.readAltitude();
         Serial.print(",");
         Serial.print("Altitude(m):");
@@ -192,7 +201,7 @@ void loop(void){
     }
 
      //if altimeter is detected
-    if (bitRead(connectionBit, 5) == 1 && dataFile){
+    if (bitRead(connectionBit, 5) == 1 && bitRead(connectionBit, 0) == 1){
         float temperature = altimeter.readTempF();
         Serial.print(" Temp(f):");
         Serial.print(temperature, 2);
@@ -203,7 +212,7 @@ void loop(void){
     }
 
     //if ozone sensor is detected
-    if (bitRead(connectionBit, 6) == 1 && dataFile){
+    if (bitRead(connectionBit, 6) == 1 && bitRead(connectionBit, 0) == 1){
         MQ131.sample();
         Serial.print("Concentration O3 : ");
         Serial.print(MQ131.getO3(PPM));
