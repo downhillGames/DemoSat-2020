@@ -17,7 +17,7 @@
 // bit 7 - temp sensor
 
 // Chip Select pin is tied to pin 8 on the SparkFun SD Card Shield
-const int chipSelect = 8;  
+//const int chipSelect = 8;  
 
 char connectionBit = 0;
     
@@ -58,10 +58,12 @@ void connectAltimeter(){
 
 void connectSD(){
     Serial.print("Initializing SD card...");
-    pinMode(chipSelect, OUTPUT);
     pinMode(10, OUTPUT);
+    pinMode(8, OUTPUT);
+    digitalWrite(10,HIGH);
+    digitalWrite(8,HIGH);
     // see if the card is present and can be initialized:
-    if (!SD.begin(chipSelect)) {
+    if (!SD.begin(8)) {
       Serial.println("Card failed, or not present");
       // don't do anything more:
       return;
