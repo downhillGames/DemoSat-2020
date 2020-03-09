@@ -139,10 +139,10 @@ void setup(void)
     while (!Serial) {
             ; // wait for serial port to connect. Needed for Leonardo only
     }
+    connectSD();
     Wire.begin(); 
     connectUVSensors();
     connectAltimeter();
-    connectSD();
     //connectTemp();
     //connectOzoneSensor();
 }
