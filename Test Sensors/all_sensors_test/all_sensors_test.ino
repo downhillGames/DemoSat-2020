@@ -179,9 +179,11 @@ void loop(void){
     //if altimeter is detected
     if (bitRead(connectionBit, 5) == 1 && dataFile){
         float altitude = altimeter.readAltitude();
+        Serial.print(",");
         Serial.print("Altitude(m):");
         Serial.print(altitude, 2);
         Serial.print(", ");
+        dataFile.print(",");
         dataFile.print("Altitude(m):");
         dataFile.print(altitude, 2);
         dataFile.print(", ");
@@ -210,7 +212,8 @@ void loop(void){
         dataFile.print(", ");
     }
 
-    
+    dataFile.print(millis() / 1000);
+    dataFile.println();
     dataFile.close();   //close file
     delay(500); //delay 500
     
