@@ -5,7 +5,7 @@
 #include <SD.h>
 
 
-//#define TCAADDR1 0x70  //Multiplexer 1
+#define TCAADDR1 0x70  //Multiplexer 1
 
 // bit 0 - sd card (if we can get that)
 // bit 1 - uv sensor 1
@@ -17,7 +17,7 @@
 // bit 7 - temp sensor
 
 // Chip Select pin is tied to pin 8 on the SparkFun SD Card Shield
-//const int chipSelect = 8;  
+const int chipSelect = 8;  
 
 char connectionBit = 0;
     
@@ -32,7 +32,7 @@ VEML6075 uv_4; // Create VEML6075 object 4 (uv sensor 4)
 /*Selects the channel on the multiplexor (starts at 0)*/
 void tcaselect(uint8_t i) {
     if (i > 7) return;
-    Wire.beginTransmission(0x70);
+    Wire.beginTransmission(TCAADDR1);
     Wire.write(1 << i);
     Wire.endTransmission();
 }
@@ -58,10 +58,10 @@ void connectAltimeter(){
 
 void connectSD(){
     Serial.print("Initializing SD card...");
-    pinMode(8, OUTPUT);
+    pinMode(chipSelect, OUTPUT);
 
     // see if the card is present and can be initialized:
-    if (!SD.begin(8)) {
+    if (!SD.begin(chipSelect)) {
       Serial.println("Card failed, or not present");
       // don't do anything more:
       return;
