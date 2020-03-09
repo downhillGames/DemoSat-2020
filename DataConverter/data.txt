@@ -1,9 +1,19 @@
-1,2,HI3,4,5,6,7,8,9,10,12,12,12,12,12,12
-2,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
-3,2,3,4,5,6,7,8,9,10,12,HI12,12,12,12,12
-4,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
-5,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
-6,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
-7,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
-8,2,3,4,5,6,HI7,8,9,10,12,12,12,12,12,12
-9,2,3,4,5,6,7,8,9,10,12,12,12,12,12,12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12
+uv_1_a 1,uv_2_b 2,uv_2_comp1 3, uv_2_comp1 4, uv_2_comp1 5, uv_2_comp1 6, uv_2_comp1 7, uv_2_comp1 8, uv_2_comp1 9, uv_2_comp1 10, uv_2_comp1 13,uv_2_comp1 12, uv_2_comp1 ,uv_2_comp1 12

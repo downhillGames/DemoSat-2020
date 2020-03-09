@@ -2,8 +2,11 @@
 #include <Wire.h>
 #include "SparkFunMPL3115A2.h"
 #include "MQ131.h"
+#include <SD.h>
 
-#define TCAADDR1 0x70  //Multiplexer 1
+
+
+//#define TCAADDR1 0x70  //Multiplexer 1
 
 // bit 0 - sd card (if we can get that)
 // bit 1 - uv sensor 1
@@ -13,6 +16,10 @@
 // bit 5 - altimeter
 // bit 6 - ozone sensor
 // bit 7 - temp sensor
+
+// Chip Select pin is tied to pin 8 on the SparkFun SD Card Shield
+//const int chipSelect = 8;  
+
 char connectionBit = 0;
     
 //Create an instance altimeter
@@ -26,7 +33,7 @@ VEML6075 uv_4; // Create VEML6075 object 4 (uv sensor 4)
 /*Selects the channel on the multiplexor (starts at 0)*/
 void tcaselect(uint8_t i) {
     if (i > 7) return;
-    Wire.beginTransmission(TCAADDR1);
+    Wire.beginTransmission(0x70);
     Wire.write(1 << i);
     Wire.endTransmission();
 }
@@ -47,7 +54,20 @@ void connectAltimeter(){
         bitSet(connectionBit, 5);
     }
 }    
-    
+
+void connectSD(){
+    Serial.print("Initializing SD card...");
+    pinMode(8, OUTPUT);
+
+    // see if the card is present and can be initialized:
+    if (!SD.begin(8)) {
+      Serial.println("Card failed, or not present");
+      // don't do anything more:
+      return;
+    }
+    bitSet(connectionBit, 0);
+    Serial.println("card initialized.");    
+}
 
 void connectOzoneSensor(){
 
@@ -116,55 +136,82 @@ void setup(void)
 {
     Serial.begin(9600);
     
-    Wire.begin();
-        
+    Wire.begin(); 
     connectUVSensors();
     connectAltimeter();
-    connectOzoneSensor();
+    connectSD();
+    //connectOzoneSensor();
 }
 
 void loop(void){
 
+    File dataFile = SD.open("datalog.txt", FILE_WRITE);
     //if uv sensor 1 is detected
-    if (bitRead(connectionBit, 1) == 1){
+    if (bitRead(connectionBit, 1) == 1 && dataFile){
         tcaselect(0);
         Serial.println(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
+        dataFile.println(String(uv_1.a()) + ", " + String(uv_1.b()) + ", " + String(uv_1.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " + String(uv_1.index()));
     }
 
    //if uv sensor 2 is detected
-    if (bitRead(connectionBit, 2) == 1){
+    if (bitRead(connectionBit, 2) == 1 && dataFile){
         tcaselect(1);
         Serial.println(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
+        dataFile.println(String(uv_2.a()) + ", " + String(uv_2.b()) + ", " + String(uv_2.uvComp1()) + ", " + String(uv_2.uvComp2()) + ", " + String(uv_2.index()));
     }
 
     //if uv sensor 3 is detected
-    if (bitRead(connectionBit, 3) == 1){
+    if (bitRead(connectionBit, 3) == 1 && dataFile){
         tcaselect(2);
         Serial.println(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
+        dataFile.println(String(uv_3.a()) + ", " + String(uv_3.b()) + ", " + String(uv_3.uvComp1()) + ", " + String(uv_1.uvComp2()) + ", " +  String(uv_3.index()));
     }
 
     
     //if uv sensor 4 is detected
-    if (bitRead(connectionBit, 4) == 1){
+    if (bitRead(connectionBit, 4) == 1 && dataFile){
         tcaselect(3);
         Serial.println(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
+        dataFile.println(String(uv_4.a()) + ", " + String(uv_4.b()) + ", " +String(uv_4.uvComp1()) + ", " + String(uv_4.uvComp2()) + ", " +  String(uv_4.index()));
+        
     }
 
     //if altimeter is detected
-    if (bitRead(connectionBit, 5) == 1){
+    if (bitRead(connectionBit, 5) == 1 && dataFile){
         float altitude = altimeter.readAltitude();
         Serial.print("Altitude(m):");
         Serial.print(altitude, 2);
+        Serial.print(", ");
+        dataFile.print("Altitude(m):");
+        dataFile.print(altitude, 2);
+        dataFile.print(", ");
+    }
+
+     //if altimeter is detected
+    if (bitRead(connectionBit, 5) == 1 && dataFile){
+        float temperature = altimeter.readTempF();
+        Serial.print(" Temp(f):");
+        Serial.print(temperature, 2);
+        Serial.print(", ");
+        dataFile.print(" Temp(f):");
+        dataFile.print(temperature, 2);
+        dataFile.print(", ");
     }
 
     //if ozone sensor is detected
-    if (bitRead(connectionBit, 6) == 1){
+    if (bitRead(connectionBit, 6) == 1 && dataFile){
         MQ131.sample();
         Serial.print("Concentration O3 : ");
         Serial.print(MQ131.getO3(PPM));
         Serial.println(" ppm");
+        dataFile.print("Concentration O3 : ");
+        dataFile.print(MQ131.getO3(PPM));
+        dataFile.print(" ppm");
+        dataFile.print(", ");
     }
-             
+
+    
+    dataFile.close();   //close file
     delay(500); //delay 500
     
 
