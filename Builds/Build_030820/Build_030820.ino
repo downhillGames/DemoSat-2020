@@ -119,21 +119,21 @@ void loop(void){
     //if uv sensor 1 is detected
     if (bitRead(connectionBit, 1) == 1 ){
         tcaselect(0);
-        Serial.print("UV_1_A " + String(uv_1.a()) + ",UV_1_B " + String(uv_1.b()) + ",UV_1_COMP1 " + String(uv_1.uvComp1()) + ",UV_1_COMP2, " + String(uv_1.uvComp2()) + ",UV_1_INDEX " + String(uv_1.index()) + ",");
+        Serial.print("UV_1_A " + String(uv_1.a()) + ",UV_1_B " + String(uv_1.b()) + ",UV_1_COMP1 " + String(uv_1.uvComp1()) + ",UV_1_COMP2 " + String(uv_1.uvComp2()) + ",UV_1_INDEX " + String(uv_1.index()) + ",");
 
     }
 
    //if uv sensor 2 is detected
     if (bitRead(connectionBit, 2) == 1 ){
         tcaselect(1);
-        Serial.print("UV_2_A " + String(uv_2.a()) + ",UV_2_B " + String(uv_2.b()) + ",UV_2_COMP1 " + String(uv_2.uvComp1()) + ",UV_2_COMP2, " + String(uv_2.uvComp2()) + ",UV_2_INDEX " + String(uv_2.index()) + ",");
+        Serial.print("UV_2_A " + String(uv_2.a()) + ",UV_2_B " + String(uv_2.b()) + ",UV_2_COMP1 " + String(uv_2.uvComp1()) + ",UV_2_COMP2 " + String(uv_2.uvComp2()) + ",UV_2_INDEX " + String(uv_2.index()) + ",");
 
     }
 
     //if uv sensor 3 is detected
     if (bitRead(connectionBit, 3) == 1 ){
         tcaselect(2);
-        Serial.print("UV_3_A " + String(uv_3.a()) + ",UV_3_B " + String(uv_3.b()) + ",UV_3_COMP1 " + String(uv_3.uvComp1()) + ",UV_3_COMP2, " + String(uv_3.uvComp2()) + ",UV_3_INDEX " + String(uv_3.index()) + ",");
+        Serial.print("UV_3_A " + String(uv_3.a()) + ",UV_3_B " + String(uv_3.b()) + ",UV_3_COMP1 " + String(uv_3.uvComp1()) + ",UV_3_COMP2 " + String(uv_3.uvComp2()) + ",UV_3_INDEX " + String(uv_3.index()) + ",");
 
     }
 
@@ -141,7 +141,7 @@ void loop(void){
     //if uv sensor 4 is detected
     if (bitRead(connectionBit, 4) == 1 ){
         tcaselect(3);
-        Serial.print("UV_4_A " + String(uv_4.a()) + ",UV_4_B " + String(uv_4.b()) + ",UV_4_COMP1 " + String(uv_4.uvComp1()) + ",UV_4_COMP2, " + String(uv_4.uvComp2()) + ",UV_4_INDEX " + String(uv_4.index()) + ",");
+        Serial.print("UV_4_A " + String(uv_4.a()) + ",UV_4_B " + String(uv_4.b()) + ",UV_4_COMP1 " + String(uv_4.uvComp1()) + ",UV_4_COMP2 " + String(uv_4.uvComp2()) + ",UV_4_INDEX " + String(uv_4.index()) + ",");
         
     }
 
@@ -160,9 +160,9 @@ void loop(void){
         Serial.print(temperature, 2);
         Serial.print(", ");
     }
-
-    Serial.print(millis() / 1000);
-    Serial.print("\r");
+    Serial.print("timestamp");
+    Serial.print(millis());
+    Serial.print("; ");
     delay(500); //delay 500
     
 

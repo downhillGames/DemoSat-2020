@@ -11,8 +11,8 @@ Date        : 02/22/18
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#define MAX_WORD_LEN 100000
-#define MAX_LINE_LEN 100000
+#define MAX_WORD_LEN 10000
+#define MAX_LINE_LEN 10000
 
 //first page (checkout)
 #define dataTXT "data.txt"
@@ -86,7 +86,7 @@ int sendContentTo(FILE *in, FILE *out)
         char oldWord21[] = "Alt ";
         char oldWord22[] = "CO_3 ";
         char oldWord23[] = "TEMP ";
-
+        char oldWord24[] = ";";
         char newWord[] = "";
         replaceAll(line, oldWord0, newWord);
         replaceAll(line, oldWord1, newWord);
