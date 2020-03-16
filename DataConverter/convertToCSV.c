@@ -63,25 +63,25 @@ int sendContentTo(FILE *in, FILE *out)
         char oldWord1[] = "UV_1_A ";
         char oldWord2[] = "UV_1_B ";
         char oldWord3[] = "UV_1_COMP1 ";
-        char oldWord4[] = "UV_1_COMP1 ";
+        char oldWord4[] = "UV_1_COMP2 ";
         char oldWord5[] = "UV_1_INDEX ";
 
         char oldWord6[] = "UV_2_A ";
         char oldWord7[] = "UV_2_B ";
         char oldWord8[] = "UV_2_COMP1 ";
-        char oldWord9[] = "UV_2_COMP1 ";
+        char oldWord9[] = "UV_2_COMP2 ";
         char oldWord10[] = "UV_2_INDEX ";
 
         char oldWord11[] = "UV_3_A ";
         char oldWord12[] = "UV_3_B ";
         char oldWord13[] = "UV_3_COMP1 ";
-        char oldWord14[] = "UV_3_COMP1 ";
+        char oldWord14[] = "UV_3_COMP2 ";
         char oldWord15[] = "UV_3_INDEX ";
 
         char oldWord16[] = "UV_4_A ";
         char oldWord17[] = "UV_4_B ";
         char oldWord18[] = "UV_4_COMP1 ";
-        char oldWord19[] = "UV_4_COMP1 ";
+        char oldWord19[] = "UV_4_COMP2 ";
         char oldWord20[] = "UV_4_INDEX ";
 
         char oldWord21[] = "Altitude";
