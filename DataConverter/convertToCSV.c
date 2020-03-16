@@ -289,8 +289,10 @@ void replaceFile(){
         fprintf(stdout, "Character: %c \n", ch);
         if (ch==EOF)
             break;
-		else if (ch==';')
-			fputc('\n', fpw);
+	else if (ch==';'){
+	    ch = fgetc(fpr);
+	    fputc('\n', fpw);
+	}
         else
             fputc(ch, fpw);
     }
