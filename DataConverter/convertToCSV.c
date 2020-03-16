@@ -30,7 +30,7 @@ int appendToFile(char *fileName, char*newText);
 int main(void)
 {
     //strings to append
-	char append[1000] ="UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, ALTITUDE, OZONE, TEMP, TIMESTAMP  \n";
+	char append[1000] ="UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, ALTITUDE, TEMP, TIMESTAMP  \n";
     appendPHP(dataTXT, dataCSV, append);
 	return 0;
 }
@@ -59,33 +59,33 @@ int sendContentTo(FILE *in, FILE *out)
 	while (fgets(line, MAX_LINE_LEN, in) != NULL)
 	{
         char oldWord0[] = "HI";
-        char oldWord1[] = "uv_1_a ";
-        char oldWord2[] = "uv_1_b ";
-        char oldWord3[] = "uv_1_comp1 ";
-        char oldWord4[] = "uv_1_comp2 ";
-        char oldWord5[] = "uv_1_index ";
+        char oldWord1[] = "UV_1_A ";
+        char oldWord2[] = "UV_1_B ";
+        char oldWord3[] = "UV_1_COMP1 ";
+        char oldWord4[] = "UV_1_COMP1 ";
+        char oldWord5[] = "UV_1_INDEX ";
 
-        char oldWord6[] = "uv_2_a ";
-        char oldWord7[] = "uv_2_b ";
-        char oldWord8[] = "uv_2_comp1 ";
-        char oldWord9[] = "uv_2_comp2 ";
-        char oldWord10[] = "uv_2_index ";
+        char oldWord6[] = "UV_2_A ";
+        char oldWord7[] = "UV_2_B ";
+        char oldWord8[] = "UV_2_COMP1 ";
+        char oldWord9[] = "UV_2_COMP1 ";
+        char oldWord10[] = "UV_2_INDEX ";
 
-        char oldWord11[] = "uv_3_a ";
-        char oldWord12[] = "uv_3_b ";
-        char oldWord13[] = "uv_3_comp1 ";
-        char oldWord14[] = "uv_3_comp2 ";
-        char oldWord15[] = "uv_3_index ";
+        char oldWord11[] = "UV_3_A ";
+        char oldWord12[] = "UV_3_B ";
+        char oldWord13[] = "UV_3_COMP1 ";
+        char oldWord14[] = "UV_3_COMP1 ";
+        char oldWord15[] = "UV_3_INDEX ";
 
-        char oldWord16[] = "uv_4_a ";
-        char oldWord17[] = "uv_4_b ";
-        char oldWord18[] = "uv_4_comp1 ";
-        char oldWord19[] = "uv_4_comp2 ";
-        char oldWord20[] = "uv_4_index ";
+        char oldWord16[] = "UV_4_A ";
+        char oldWord12[] = "UV_4_B ";
+        char oldWord13[] = "UV_4_COMP1 ";
+        char oldWord14[] = "UV_4_COMP1 ";
+        char oldWord15[] = "UV_4_INDEX ";
 
-        char oldWord21[] = "Alt ";
-        char oldWord22[] = "CO_3 ";
-        char oldWord23[] = "TEMP ";
+        char oldWord21[] = "Altitude";
+        char oldWord22[] = "timestamp";
+        char oldWord23[] = "Temp";
         char oldWord24[] = ";";
         char newWord[] = "";
         replaceAll(line, oldWord0, newWord);
