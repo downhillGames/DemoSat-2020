@@ -17,7 +17,7 @@ Date        : 02/22/18
 //first page (checkout)
 #define dataTXT "data.txt"
 #define dataCSV "data.csv"
-
+#define dataAppend "data_append.txt"
 
 //prototypes
 int wordCount(FILE *fp);
@@ -30,8 +30,9 @@ int appendToFile(char *fileName, char*newText);
 int main(void)
 {
     //strings to append
+	replaceFile();
 	char append[1000] ="UV_1_A, UV_1_B, UV_1_COMP_1, UV_1_COMP_2, UV_1_INDEX, UV_2_A, UV_2_B, UV_2_COMP_1, UV_2_COMP_2, UV_2_INDEX, UV_3_A, UV_3_B, UV_3_COMP_1, UV_3_COMP_2, UV_3_INDEX, UV_4_A, UV_4_B, UV_4_COMP_4, UV_4_COMP_4, UV_4_INDEX, ALTITUDE, TEMP, TIMESTAMP  \n";
-    appendPHP(dataTXT, dataCSV, append);
+    appendPHP(dataAppend, dataCSV, append);
 	return 0;
 }
 
@@ -78,10 +79,10 @@ int sendContentTo(FILE *in, FILE *out)
         char oldWord15[] = "UV_3_INDEX ";
 
         char oldWord16[] = "UV_4_A ";
-        char oldWord12[] = "UV_4_B ";
-        char oldWord13[] = "UV_4_COMP1 ";
-        char oldWord14[] = "UV_4_COMP1 ";
-        char oldWord15[] = "UV_4_INDEX ";
+        char oldWord17[] = "UV_4_B ";
+        char oldWord18[] = "UV_4_COMP1 ";
+        char oldWord19[] = "UV_4_COMP1 ";
+        char oldWord20[] = "UV_4_INDEX ";
 
         char oldWord21[] = "Altitude";
         char oldWord22[] = "timestamp";
@@ -257,6 +258,48 @@ void appendPHP(char *inputFile, char *outputFile, char*newText)
 }
 
 
+
+void replaceFile(){
+	char ch;
+
+    /* Pointer for both the file*/
+    FILE *fpr, *fpw;
+    /* Opening file FILE1.C in “r” mode for reading */
+    fpr = fopen(dataTXT, "r");
+
+    /* Ensure FILE1.C opened successfully*/
+    if (fpr == NULL)
+    {
+         puts("Input file cannot be opened");
+    }
+
+    /* Opening file FILE2.C in “w” mode for writing*/
+    fpw= fopen(dataAppend , "w");
+
+    /* Ensure FILE2.C opened successfully*/
+    if (fpw == NULL)
+    {
+       puts("Output file cannot be opened");
+    }
+
+    /*Read & Write Logic*/
+    while(1)
+    {
+        ch = fgetc(fpr);
+        fprintf(stdout, "Character: %c \n", ch);
+        if (ch==EOF)
+            break;
+		else if (ch==';')
+			fputc('\n', fpw);
+        else
+            fputc(ch, fpw);
+    }
+
+    /* Closing both the files */
+    fclose(fpr);
+    fclose(fpw);
+}
+
 //Problem #3
 int getWordAt(FILE *fp, int pos, char *word)
 {
@@ -282,4 +325,3 @@ int getWordAt(FILE *fp, int pos, char *word)
 
 	return 0;
 	}
-
